@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			body {
+				scroll-behavior: smooth;
+				background: url(https://images.unsplash.com/photo-1495162048225-6b3b37b8a69e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80);
+				background-attachment: fixed;
+				background-size: cover;
+				display: grid;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.navbar {
+				background: rgba(0, 0, 0, 0.25);
+				height: 4rem;
+				backdrop-filter: blur(30px);
+			}
+
+			.navbar.scrolled {
+				/* background: rgba(255, 255, 255, 0.25); */
+				background: rgba(0, 0, 0, 0.25);
+				backdrop-filter: blur(30px);
+				transition: 1000ms all;
+			}
+
+			.navbar-brand.scrolled {
+				color: white;
+			}
+
+			.nav-link.scrolled {
+				color: white;
+				font-size: 22px;
+				font-family: Ubuntu;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.navbar-brand {
+				padding-left: 2rem;
+				color: white;
+				font-size: 36px;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.navbar-brand:hover {
+				color: rgb(128, 128, 128);
+				filter: blur(0.5px);
+				transition: 100ms all;
+			}
+
+			.nav-link {
+				color: white;
+				font-size: 22px;
+				/* font-family: Ubuntu; */
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.nav-link:hover {
+				color: rgb(128, 128, 128);
+			}
+
+			.jumbotron {
+				background: inherit;
+				color: white;
+			}
+
+			.containerJumbo {
+				padding-top: 1.5rem;
+				width: 900px;
+				height: 240px;
+				backdrop-filter: blur(30px);
+				box-shadow: 1px 1px 300px 2.5px rgba(0, 0, 0, 0.86);
+				border-radius: 4px;
+			}
+
+			.containerCard {
+				backdrop-filter: blur(30px);
+				box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+				background: inherit;
+				color: white;
+				padding: 10px;
+				backdrop-filter: blur(30px);
+				/* box-shadow: inset 0 0 1000px rgba(255, 255, 255, 0.5); */
+				box-shadow: 4px 4px 100px 0px rgba(255, 255, 255, 0.15);
+				border: 0.25px solid gray;
+			}
+
+			.containerCard:hover {
+				backdrop-filter: blur(30px);
+				box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+				background: inherit;
+				color: white;
+				padding: 10px;
+				backdrop-filter: blur(30px);
+				/* box-shadow: inset 0 0 1000px rgba(255, 255, 255, 0.5); */
+				box-shadow: 4px 4px 100px 0px rgba(255, 255, 255, 0.15);
+				border: 0.25px solid gray;
+			}
+
+
+
+			/* .blurBack {
+				backdrop-filter: blur(5px);
+			} */
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+
+		<title>Campsite Camps</title>
+	</head>
+	<body>
+		<div class="blurBack">
+			<!-- Nav Bar -->
+			<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+				<a class="navbar-brand scrollNav" href="/">Campsite Camps</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					class="collapse navbar-collapse"
+					id="navbarSupportedContent"
+				>
+					<ul class="navbar-nav ml-auto">
+						<% if(!currentUser) { %>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								style="padding-right: 1rem;"
+								href="/login"
+								>Login</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								style="padding-right: 2rem;"
+								href="/register"
+								>Sign Up</a
+							>
+						</li>
+						<% } else { %>
+						<li class="nav-item">
+							<a
+								href="#"
+								class="nav-link disabled"
+								style="font-size: 20px;"
+								>Greetings, <%= currentUser.username %></a
+							>
+						</li>
+						<li class="nav-item" style="padding-right: 20px;">
+							<a
+								class="nav-link"
+								href="/logout"
+								style="font-size: 20px;"
+								>Log Out</a
+							>
+						</li>
+						<% } %>
+					</ul>
+				</div>
+			</nav>
+			<div class="blurBack">
+				<div class="container">
+					<div
+						class="jumbotron text-center"
+						style="margin-top: 80px;"
+					>
+						<div class="container containerJumbo">
+							<h1 class="display-4">Welcome to Campgrounds</h1>
+							<p>
+								View our Handpicked Campgrounds from all over
+								the World
+							</p>
+							<p>
+								<a
+									class="btn-large waves-effect waves-light red btn btn-lg btn-outline-primary"
+									style="border-radius: 8px;"
+									href="/campgrounds/new"
+									>Add Campsite</a
+								>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<section id="gallery">
+					<div class="container-fluid">
+						<div class="row justify-content-around">
+							<% for(var i = 0; i < campgrounds.length; i++){ %>
+							<div class="col-lg-4 col-sm-6 mb-4">
+								<div
+									class="card containerCard"
+									style="
+										height: 28rem;
+										width: 25rem;
+										border-radius: 4px;
+									"
+								>
+									<img
+										class="card-img-top"
+										src="<%= campgrounds[i].image %>"
+										style="height: 250px;"
+									/>
+									<div class="card-body">
+										<h5
+											class="card-title text-center"
+											style="font-size: 21px;"
+										>
+											<%= campgrounds[i].name %>
+										</h5>
+										<p class="card-text">
+											<%= campgrounds[i].subtitle %>
+										</p>
+										<!-- <p class="card-text">
+											 Days: <%= campgrounds[i].days %> Nights:  <%= campgrounds[i].nights %>
+										</p> -->
+
+										<a
+											href="/campgrounds/<%= campgrounds[i]._id %>"
+											class="btn-small waves-effect waves-light blue btn btn-lg btn-outline-success"
+											>Visit</a
+										>
+									</div>
+								</div>
+							</div>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<br />
+		<footer>
+			<div
+				class="footer-copyright text-center py-3"
+				style="color: white; font-size: 12px;"
+			>
+				© 2020 Copyright:
+				<a href="/" style="color: white; font-size: 12px;"
+					>Campsite Camps.</a
+				>
+			</div>
+		</footer>
+	</body>
+</html>

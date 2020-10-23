@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			body {
+				background: url(https://cdn.osxdaily.com/wp-content/uploads/2017/06/ios-11-default-wallpaper.jpg);
+				background-attachment: fixed;
+				background-size: cover;
+				display: grid;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.navbar {
+				background: rgba(0, 0, 0, 0.25);
+				height: 4rem;
+				backdrop-filter: blur(30px);
+			}
+
+			.navbar.scrolled {
+				/* background: rgba(255, 255, 255, 0.25); */
+				background: rgba(0, 0, 0, 0.25);
+				backdrop-filter: blur(30px);
+				transition: 1000ms all;
+			}
+
+			.navbar-brand.scrolled {
+				color: white;
+			}
+
+			.nav-link.scrolled {
+				color: white;
+				font-size: 22px;
+				font-family: Ubuntu;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.navbar-brand {
+				padding-left: 2rem;
+				color: white;
+				font-size: 36px;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.navbar-brand:hover {
+				color: rgb(128, 128, 128);
+				filter: blur(0.5px);
+				transition: 100ms all;
+			}
+
+			.nav-link {
+				color: white;
+				font-size: 22px;
+				/* font-family: Ubuntu; */
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.nav-link:hover {
+				color: rgb(128, 128, 128);
+			}
+
+			.jumbotron {
+				background: inherit;
+				color: white;
+			}
+
+			.containerJumbo {
+				padding-top: 1.5rem;
+				width: 900px;
+				height: 540px;
+				display: grid;
+				align-items: center;
+				backdrop-filter: blur(30px);
+				box-shadow: 1px 1px 300px 2.5px rgba(0, 0, 0, 0.86);
+				border-radius: 10px;
+			}
+
+			.formInput {
+				width: 100%;
+				box-sizing: border-box;
+				height: 40px;
+				padding: 10px;
+				background: inherit;
+				border-top: hidden;
+				border-bottom: 0.5px solid white;
+				border-right: hidden;
+				border-left: hidden;
+				color: white;
+				outline: none;
+			}
+
+			::placeholder {
+				color: white;
+				opacity: 0.4;
+				font-size: 21px;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+
+		<title>Campsite Camps</title>
+	</head>
+	<body>
+		<!-- Nav Bar -->
+		<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+			<a class="navbar-brand scrollNav" href="/">Campsite Camps</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<% if(!currentUser) { %>
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							style="padding-right: 1rem;"
+							href="/login"
+							>Login</a
+						>
+					</li>
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							style="padding-right: 2rem;"
+							href="/register"
+							>Sign Up</a
+						>
+					</li>
+					<% } else { %>
+					<li class="nav-item">
+						<a
+							href="#"
+							class="nav-link disabled"
+							style="font-size: 20px;"
+							>Greetings, <%= currentUser.username %></a
+						>
+					</li>
+					<li class="nav-item" style="padding-right: 20px;">
+						<a
+							class="nav-link"
+							href="/logout"
+							style="font-size: 20px;"
+							>Log Out</a
+						>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</nav>
+		<div class="container containerJumbo" style="margin-top: 90px;">
+			<div style="width: 70%; margin: 25px auto;">
+				<h1 class="text-center display-3" style="color: white;">
+					Create a new Campsite
+				</h1>
+				<br />
+				<form action="/campgrounds" method="POST">
+					<div class="form-group">
+						<input
+							class="formInput"
+							type="text"
+							placeholder="Name of the Campsite"
+							name="name"
+						/>
+					</div>
+					<div class="form-group">
+						<input
+							class="formInput"
+							type="text"
+							placeholder="Add an image URL"
+							name="image"
+						/>
+					</div>
+					<div class="form-group">
+						<input
+							class="formInput"
+							type="text"
+							placeholder="Description"
+							name="subtitle"
+						/>
+					</div>
+					<div class="form-group">
+						<button
+							class="btn btn-lg btn-primary btn-block"
+							style="font-size: larger; font-weight: bolder;"
+						>
+							Submit
+						</button>
+					</div>
+				</form>
+				<a href="/campgrounds" style="color: white;">Go Back</a>
+			</div>
+		</div>
+		<footer>
+			<div
+				class="footer-copyright text-center py-3"
+				style="color: black; font-size: 12px;"
+			>
+				© 2020 Copyright:
+				<a href="/" style="color: black; font-size: 12px;"
+					>Campsite Camps.</a
+				>
+			</div>
+		</footer>
+	</body>
+</html>
